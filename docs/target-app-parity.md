@@ -7,7 +7,7 @@ Estados: planejado, parcial, verificado, bloqueado. Verificado exige evidência 
 | ID | Capacidade | Estado | Evidência / limite |
 |---|---|---|---|
 | P01 | Conectar, renovar e desconectar conta | parcial | Login no navegador + PKCE/chaveiro; login real relatado pelo usuário, renovação/desconexão não homologadas. Cliente OAuth deve ser fornecido pela distribuição, não criado pelo usuário comum |
-| P02 | Selecionar pasta para espelhamento | parcial | Navegação remota por nomes e trilha de subpastas; IDs internos; seletores locais opcionais zenity/kdialog. Leitura real relatada pelo usuário; fluxo novo testado por HTTP simulado e renderização local |
+| P02 | Selecionar pasta para espelhamento | parcial | Navegação remota por nomes e trilha de subpastas; IDs internos; pastas homônimas na mesma lista são identificadas pelo ID no seletor. Seletores locais opcionais zenity/kdialog. Leitura real relatada pelo usuário; fluxo testado por HTTP simulado e renderização local |
 | P03 | Criação/edição bidirecional preserva conteúdo | parcial | Testes com bytes reais, SQLite e remoto simulado; endpoints HTTP testados localmente; falta Google real |
 | P04 | Renomear/mover preserva identidade | parcial | Testes nos dois sentidos; pastas vazias e movimentos de árvores com IDs estáveis testados localmente; exclusão de diretórios e movimentos para fora da raiz bloqueados |
 | P05 | Exclusão recuperável; acesso perdido não apaga cópia | parcial | Lixeira/quarentena implementadas e testadas com remoto simulado; desligadas por padrão |

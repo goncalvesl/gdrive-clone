@@ -975,11 +975,20 @@ impl App {
                             if self.folders_loaded && self.folders.is_empty() {
                                 ui.label("Esta pasta não contém subpastas.");
                             }
+                            let mut sibling_name_counts = std::collections::BTreeMap::new();
+                            for (_, name) in &self.folders {
+                                *sibling_name_counts.entry(name.as_str()).or_insert(0usize) += 1;
+                            }
                             for (id, name) in &self.folders {
+                                let label = folder_label(
+                                    name,
+                                    id,
+                                    sibling_name_counts.get(name.as_str()).copied().unwrap_or(1),
+                                );
                                 if ui
                                     .add_sized(
                                         [ui.available_width(), 34.],
-                                        egui::Button::new(format!("▸  {name}")),
+                                        egui::Button::new(format!("▸  {label}")),
                                     )
                                     .on_hover_text(format!("Identificador: {id}"))
                                     .clicked()
@@ -1016,6 +1025,14 @@ impl App {
                 }
             });
         self.show_folders = open && !chosen;
+    }
+}
+
+fn folder_label(name: &str, id: &str, sibling_name_count: usize) -> String {
+    if sibling_name_count > 1 {
+        format!("{name} · ID {id}")
+    } else {
+        name.to_owned()
     }
 }
 fn metric(ui: &mut egui::Ui, label: &str, count: usize) {

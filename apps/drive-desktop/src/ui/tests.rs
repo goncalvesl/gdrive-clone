@@ -58,6 +58,20 @@ fn render(app: &mut App, ctx: &egui::Context, events: Vec<egui::Event>) -> egui:
         |ctx| app.render_preferences(ctx),
     )
 }
+
+#[test]
+fn folder_chooser_disambiguates_duplicate_names_without_changing_remote_name() {
+    assert_eq!(
+        folder_label("Projetos", "folder-a", 2),
+        "Projetos · ID folder-a"
+    );
+    assert_eq!(
+        folder_label("Projetos", "folder-b", 2),
+        "Projetos · ID folder-b"
+    );
+    assert_eq!(folder_label("Único", "folder-c", 1), "Único");
+}
+
 fn click(app: &mut App, ctx: &egui::Context, position: egui::Pos2) {
     render(
         app,

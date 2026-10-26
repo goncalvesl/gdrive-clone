@@ -14,7 +14,7 @@ Esta é uma prévia de espelhamento. Login/listagem reais foram relatados pelo u
 
 ## Produzir pacotes
 
-O workflow [release.yml](../.github/workflows/release.yml) compila no Ubuntu 22.04 para `.deb`, `.rpm` e AppImage; gera o pacote Arch em container Arch Linux. Uma tag `v0.1.0` dispara os quatro artefatos e publica um prerelease. `workflow_dispatch` permite testar os três builds Ubuntu sem publicar.
+O workflow [release.yml](../.github/workflows/release.yml) compila no Ubuntu 22.04 para `.deb`, `.rpm` e AppImage; gera o pacote Arch em container Arch Linux. Uma tag de versão como `v0.1.1` dispara os quatro artefatos e publica um prerelease. `workflow_dispatch` permite testar os três builds Ubuntu sem publicar.
 
 Localmente, com Rust 1.99.1 e `nfpm` 2.48.0, `./scripts/package.sh deb` ou `rpm` grava em `dist/`. Com `appimagetool`, `./scripts/package.sh appimage` faz o AppImage. No Arch, `makepkg -p packaging/PKGBUILD` requer a tag pública correspondente. `./scripts/check.sh` executa os checks do projeto. Os pacotes gerados e o AppImage não incluem cliente OAuth nem tokens.
 

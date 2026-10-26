@@ -133,9 +133,17 @@
 - Criação/remoção/lixeira de pasta, caminho que sai da raiz, parent desconhecido, ciclo potencial, metadados insuficientes ou colisão continuam exigindo inventário completo. Isso é necessário para descobrir descendentes que possam entrar/sair e preservar a política de acesso/exclusão.
 - Teste HTTP valida movimento de pai e subpasta com arquivos descendentes sem chamada a files.list; cobertura mantém fallback estrutural e rollback de delta/cursor.
 - Validação: `scripts/check.sh` passou com 125 entradas de teste incluindo helper, Clippy e build release. Sem acesso a conta Google. Mudanças de diretório ainda precisam de homologação da API Changes real.
+
+## 2026-10-26 — Seleção de pastas homônimas
+
+- O seletor remoto agora mostra o ID completo junto ao nome quando há pastas com nomes iguais na mesma lista. A trilha, a configuração e o ID usado para navegar continuam separados do rótulo visual.
+- Teste de UI cobre rótulos distintos para homônimos e nome sem alteração para pasta única. Isso permite selecionar raízes ambíguas sem mudar o contrato do motor.
+- Limite: nomes duplicados no inventário de sincronização continuam bloqueados; ainda é necessária uma projeção que preserve o nome remoto em operações posteriores.
+- Validação: `scripts/check.sh` passou (fmt, Clippy, 126 entradas de teste incluindo helper e build release). Nenhuma conta real foi usada.
 # 2026-10-26 — Preparação da distribuição pública GPL
 
 - Proprietário autorizou publicação pública no GitHub sob GPL-3 e pacotes AppImage, deb, rpm e Arch. Adicionada GPL-3.0-only, inventário de licenças das crates e avisos das fontes embarcadas; nenhum cliente OAuth ou token foi incluído.
 - Criadas receitas de empacotamento, desktop/MIME/serviço para instalação de sistema, AppDir e workflow de prerelease. O login público continua indisponível até o responsável providenciar cliente OAuth Desktop e a verificação necessária; release identificado como prévia.
 - Validação local: `scripts/check.sh` passou (fmt, Clippy, testes e build release); `bash -n` e `desktop-file-validate` passaram; deb, rpm e AppImage gerados; conteúdo dos pacotes inspecionado; AppImage respondeu a `--help`. Arch e workflow GitHub ainda pendentes de tag pública.
 - Próximo passo: publicar o repositório e tag, verificar os quatro artefatos produzidos pelo workflow e homologar instalação nas distribuições com dados sintéticos.
+- O primeiro workflow da tag v0.1.0 falhou antes do empacotamento Ubuntu porque rustfmt não estava instalado no toolchain do runner. Adicionados rustfmt e Clippy explicitamente ao setup; versão da prévia ajustada para 0.1.1. `scripts/check.sh` passou novamente localmente. A falha da primeira tentativa fica registrada, sem tratá-la como release publicado.

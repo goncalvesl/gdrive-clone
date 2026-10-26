@@ -16,6 +16,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: 1.99.1
+          components: rustfmt, clippy
       - name: Install desktop build libraries
         run: sudo apt-get update && sudo apt-get install -y libxkbcommon-dev libwayland-dev libasound2-dev libdbus-1-dev libudev-dev libx11-dev libxcursor-dev libxi-dev libxrandr-dev libgl1-mesa-dev
       - name: Check project
