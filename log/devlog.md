@@ -159,4 +159,4 @@
 
 - Preparadas página inicial e Política de Privacidade em HTML estático no diretório `docs/`, com descrição do escopo Drive, dados acessados, finalidade, armazenamento local, chaveiro, exclusão e contato. Links no README e na distribuição.
 - Conteúdo conferido contra OAuth, engine e estado local; links relativos das duas páginas válidos. Sem login, conta Google ou arquivo pessoal acessado nesta tarefa.
-- Pendente: publicar e verificar a URL no GitHub Pages; para a verificação OAuth pública, associar um domínio próprio e comprovar propriedade por DNS conforme exigência atual do Google.
+- GitHub Pages ativado a partir de `main/docs`: página inicial e política responderam HTTP 200 sem login, com HTTPS e links válidos. URL pública: `https://goncalvesl.github.io/gdrive-clone/privacy/`. Para verificação OAuth pública, ainda é necessário domínio próprio verificável por DNS conforme exigência atual do Google.
