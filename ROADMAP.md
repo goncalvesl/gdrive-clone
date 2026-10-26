@@ -18,7 +18,7 @@ O fluxo de login no navegador e seleção por nomes permanece implementado. Logi
 | M3 — espelhamento | Implementado para arquivos comuns e criação/movimento de pastas: criar/editar/renomear/mover/excluir e conflitos; 32 testes de integração com filesystem e SQLite, remoto simulado |
 | M4 — desktop/segundo plano | UI Rust com login, navegador de pastas, seletores, progresso, dados da conta e pausa; CLI e watch implementados; instalador e template systemd preparados; serviço autenticado ainda não exercitado |
 | M5 — streaming FUSE | Não implementado |
-| M6 — distribuição e paridade ampliada | Prévia pública [v0.1.2](https://github.com/goncalvesl/gdrive-clone/releases/tag/v0.1.2) sob GPL-3.0-only com AppImage, deb, rpm e Arch x86_64; workflow e conteúdo dos pacotes verificados. Instalação em outras distribuições, login público, assinatura e Flatpak pendentes |
+| M6 — distribuição e paridade ampliada | Preparada prévia [v0.1.3](https://github.com/goncalvesl/gdrive-clone/releases/tag/v0.1.3) sob GPL-3.0-only com ID público do OAuth Desktop nos pacotes AppImage, deb, rpm e Arch x86_64. AppImage, deb e rpm foram gerados e inspecionados localmente; publicação aguarda o workflow de release. Instalação em outras distribuições, verificação OAuth do Google, assinatura e Flatpak pendentes |
 
 ## Antes da versão estável
 

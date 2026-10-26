@@ -13,7 +13,7 @@ Atualizado em 2026-10-26. Evidência local: suíte automatizada, UI renderizada 
 | G07 | 2 | Streaming/FUSE, cache sob demanda e fixação offline ausentes |
 | G08 | 1 | Upload em blocos com sessão/offset persistidos, download binário parcial por Range e retry com espera implementados/testados localmente. Cursor Changes atualiza arquivos por ID e renomeações/movimentos de pastas conhecidas com a subárvore cacheada; criação/remoção, parent desconhecido e colisões usam inventário completo. Watcher local antecipa ciclos. Falta homologação real de mudanças e retomadas |
 | G09 | 2 | Múltiplas contas simultâneas/shared drives ausentes |
-| G10 | 1 | Prévia pública v0.1.2 GPL-3.0-only com AppImage/deb/rpm/Arch x86_64; workflow, conteúdo dos pacotes e `--help` do AppImage verificados. Falta homologar instalação/GUI em outras distribuições, cliente OAuth de distribuição e assinatura |
+| G10 | 1 | Prévia v0.1.3 preparada sob GPL-3.0-only; AppImage/deb/rpm x86_64 gerados e inspecionados com apenas `client_id` público, sem `client_secret`. Falta o build/publicação Arch no workflow, verificação OAuth Google, homologação em outras distribuições e assinatura |
 | G11 | 1 | Registro do dispositivo na seção Computadores: sem operação pública documentada identificada na REST/Discovery v3 consultados. [Investigação e limites](specs/computers.md). Alternativa em Meu Drive não equivale a esse registro |
 
 Não fechar G03 com testes HTTP locais. A prévia atual é utilizável para homologação de uma pasta dedicada de arquivos comuns, não uma substituição final do Drive oficial.

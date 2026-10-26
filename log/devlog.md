@@ -178,3 +178,10 @@
 - Confirmado apenas o formato do arquivo externo `/home/goncalvesl/cliente.json`: cliente OAuth Desktop com campos `client_id` e `client_secret`; valores não foram impressos nem copiados.
 - `.gitignore` agora cobre `cliente.json` e `oauth-client.json` na raiz. `git check-ignore` confirmou ambas as regras.
 - O cliente continua fora do Git; fornecê-lo à instalação por caminho externo permanece o fluxo documentado. Publicação OAuth ainda depende das exigências de verificação do Google.
+
+## 2026-10-26 — Cliente OAuth público nos pacotes v0.1.3
+
+- Cliente Desktop agora aceita JSON apenas com `installed.client_id`; login e renovação omitem `client_secret` vazio. JSON antigo com segredo continua compatível.
+- Receitas geram JSON mínimo para AppImage/deb/rpm/Arch a partir de ID ou arquivo externo. O workflow exige `GDRIVE_OAUTH_CLIENT_ID`, configurado como variável pública do repositório sem imprimir o ID.
+- Validação: `scripts/check.sh` passou; AppImage, deb e rpm foram gerados e inspecionados com o cliente local, confirmando ausência de `client_secret`. AppImage executa `--help`. Arch aguarda build do workflow. Ainda não publicado.
+- Próximo passo: executar a release v0.1.3 e conferir os quatro artefatos no GitHub.

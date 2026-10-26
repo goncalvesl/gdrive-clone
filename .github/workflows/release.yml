@@ -11,8 +11,12 @@ permissions:
 jobs:
   linux:
     runs-on: ubuntu-22.04
+    env:
+      GDRIVE_OAUTH_CLIENT_ID: ${{ vars.GDRIVE_OAUTH_CLIENT_ID }}
     steps:
       - uses: actions/checkout@v4
+      - name: Require Desktop OAuth client ID
+        run: test -n "$GDRIVE_OAUTH_CLIENT_ID"
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: 1.99.1
@@ -49,16 +53,20 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     container: archlinux:base-devel
+    env:
+      GDRIVE_OAUTH_CLIENT_ID: ${{ vars.GDRIVE_OAUTH_CLIENT_ID }}
     steps:
       - name: Install checkout dependencies
-        run: pacman -Syu --noconfirm git rust cargo libsecret
+        run: pacman -Syu --noconfirm git rust cargo libsecret python
       - uses: actions/checkout@v4
+      - name: Require Desktop OAuth client ID
+        run: test -n "$GDRIVE_OAUTH_CLIENT_ID"
       - name: Build package
         run: |
           useradd -m builder
           chown -R builder:builder "$GITHUB_WORKSPACE"
           cd packaging
-          runuser -u builder -- makepkg --noconfirm --nodeps
+          runuser -u builder -- env GDRIVE_OAUTH_CLIENT_ID="$GDRIVE_OAUTH_CLIENT_ID" makepkg --noconfirm --nodeps
           mkdir -p ../dist
           cp -- *.pkg.tar.zst ../dist/
       - uses: actions/upload-artifact@v4
@@ -80,4 +88,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "${GITHUB_REF_NAME}" dist/* --repo "${GITHUB_REPOSITORY}" --prerelease --title "${GITHUB_REF_NAME} (prévia)" --notes "Prévia de espelhamento para homologação. O login exige um cliente OAuth Desktop fornecido pelo distribuidor; nenhum cliente está incluído. Transferências e recuperação ainda não foram homologadas no Google real. Leia README.md e docs/acceptance.md antes de sincronizar dados."
+          gh release create "${GITHUB_REF_NAME}" dist/* --repo "${GITHUB_REPOSITORY}" --prerelease --title "${GITHUB_REF_NAME} (prévia)" --notes "Prévia de espelhamento para homologação. Os pacotes incluem apenas o ID público do cliente OAuth Desktop; o fluxo de login ainda depende das permissões e da verificação do projeto Google. Transferências e recuperação ainda não foram homologadas no Google real. Leia README.md e docs/acceptance.md antes de sincronizar dados."

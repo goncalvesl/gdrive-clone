@@ -15,6 +15,7 @@ use uuid::Uuid;
 #[derive(Clone, Deserialize)]
 pub struct Credentials {
     pub client_id: String,
+    #[serde(default)]
     pub client_secret: String,
 }
 #[derive(Deserialize)]
@@ -33,6 +34,18 @@ impl Credentials {
         ensure!(!parsed.installed.client_id.is_empty(), "client_id ausente");
         Ok(parsed.installed)
     }
+}
+fn token_form<'a>(
+    credentials: &'a Credentials,
+    fields: &[(&'a str, &'a str)],
+) -> Vec<(&'a str, &'a str)> {
+    let mut form = Vec::with_capacity(fields.len() + 2);
+    form.push(("client_id", credentials.client_id.as_str()));
+    if !credentials.client_secret.is_empty() {
+        form.push(("client_secret", credentials.client_secret.as_str()));
+    }
+    form.extend_from_slice(fields);
+    form
 }
 #[derive(Deserialize)]
 struct TokenResponse {
@@ -168,14 +181,15 @@ pub fn login(profile: &str, credentials: &Credentials) -> Result<()> {
                 let client = Client::builder().timeout(Duration::from_secs(30)).build()?;
                 let response = client
                     .post("https://oauth2.googleapis.com/token")
-                    .form(&[
-                        ("client_id", credentials.client_id.as_str()),
-                        ("client_secret", credentials.client_secret.as_str()),
-                        ("code", code.as_str()),
-                        ("code_verifier", verifier.as_str()),
-                        ("redirect_uri", redirect.as_str()),
-                        ("grant_type", "authorization_code"),
-                    ])
+                    .form(&token_form(
+                        credentials,
+                        &[
+                            ("code", code.as_str()),
+                            ("code_verifier", verifier.as_str()),
+                            ("redirect_uri", redirect.as_str()),
+                            ("grant_type", "authorization_code"),
+                        ],
+                    ))
                     .send()
                     .map_err(|_| {
                         anyhow::anyhow!("Falha ao trocar autorização; tente conectar novamente")
@@ -230,12 +244,13 @@ impl Session {
                 .context("Credencial inválida no chaveiro")?;
         let response = client
             .post("https://oauth2.googleapis.com/token")
-            .form(&[
-                ("client_id", self.credentials.client_id.as_str()),
-                ("client_secret", self.credentials.client_secret.as_str()),
-                ("refresh_token", secret.refresh_token.as_str()),
-                ("grant_type", "refresh_token"),
-            ])
+            .form(&token_form(
+                &self.credentials,
+                &[
+                    ("refresh_token", secret.refresh_token.as_str()),
+                    ("grant_type", "refresh_token"),
+                ],
+            ))
             .send()
             .map_err(|_| super::ApiFailure::Network("Sem conexão com o serviço de autenticação"))?;
         if response.status().as_u16() == 429 || response.status().is_server_error() {
@@ -279,5 +294,33 @@ impl Session {
                 Instant::now() + Duration::from_secs(3600),
             )),
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{CredentialFile, token_form};
+
+    #[test]
+    fn desktop_client_without_secret_omits_secret_from_token_forms() -> anyhow::Result<()> {
+        let parsed: CredentialFile =
+            serde_json::from_str(r#"{"installed":{"client_id":"synthetic-client-id"}}"#)?;
+        let fields = [("grant_type", "refresh_token")];
+        let form = token_form(&parsed.installed, &fields);
+        assert!(form.contains(&("client_id", "synthetic-client-id")));
+        assert!(form.contains(&("grant_type", "refresh_token")));
+        assert!(!form.iter().any(|(key, _)| *key == "client_secret"));
+        Ok(())
+    }
+
+    #[test]
+    fn existing_desktop_client_keeps_secret_in_token_forms() -> anyhow::Result<()> {
+        let parsed: CredentialFile = serde_json::from_str(
+            r#"{"installed":{"client_id":"synthetic-client-id","client_secret":"synthetic-secret"}}"#,
+        )?;
+        assert!(
+            token_form(&parsed.installed, &[]).contains(&("client_secret", "synthetic-secret"))
+        );
+        Ok(())
     }
 }

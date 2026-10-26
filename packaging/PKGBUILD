@@ -1,13 +1,13 @@
 # Maintainer: gdrive-clone contributors
 pkgname=gdrive-clone
-pkgver=0.1.2
+pkgver=0.1.3
 pkgrel=1
 pkgdesc='Prévia independente de espelhamento do Google Drive para Linux'
 arch=('x86_64')
 url='https://github.com/goncalvesl/gdrive-clone'
 license=('GPL-3.0-only')
 depends=('glibc' 'gcc-libs' 'libsecret')
-makedepends=('cargo' 'rust')
+makedepends=('cargo' 'rust' 'python')
 # GCC LTO objects from aws-lc-sys cannot be linked by Rust's lld on Arch.
 options=('!lto')
 source=("${url}/archive/refs/tags/v${pkgver}.tar.gz")
@@ -21,6 +21,9 @@ build() {
 package() {
   cd "${srcdir}/${pkgname}-${pkgver}"
   install -Dm755 target/release/drive-desktop "${pkgdir}/usr/bin/drive-desktop"
+  if [[ -n "${GDRIVE_OAUTH_CLIENT_FILE:-}" || -n "${GDRIVE_OAUTH_CLIENT_ID:-}" ]]; then
+    python3 scripts/write-oauth-client.py "${pkgdir}/usr/share/gdrive-clone/oauth-client.json"
+  fi
   install -Dm644 packaging/gdrive-clone.desktop "${pkgdir}/usr/share/applications/gdrive-clone.desktop"
   install -Dm644 packaging/gdrive-clone-reference.desktop "${pkgdir}/usr/share/applications/gdrive-clone-reference.desktop"
   install -Dm644 assets/drive-linux.svg "${pkgdir}/usr/share/icons/hicolor/scalable/apps/gdrive-clone.svg"
