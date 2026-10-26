@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Abrir documento Google Drive
+Exec=drive-desktop open-document %f
+Icon=gdrive-clone
+Terminal=false
+NoDisplay=true
+MimeType=application/x-gdrive-clone-reference;

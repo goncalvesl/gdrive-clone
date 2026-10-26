@@ -1,0 +1,9 @@
+# Retomada de download
+
+Contrato local de 2026-10-26 para arquivos binários. A [API Drive](https://developers.google.com/workspace/drive/api/guides/manage-downloads) documenta `Range` para downloads parciais; a implementação ainda requer homologação no Google real.
+
+Uma intenção `running` identifica o arquivo remoto por ID e revisão e o staging privado por ID da operação. Após interrupção, o tamanho do staging regular, sem symlink nem hard link, é o offset local. Não há offset de download no SQLite. Antes de solicitar bytes, o executor revalida a intenção, o destino local e os metadados remotos. O download parcial pede `Range: bytes=<offset>-`; só aceita HTTP 206 com `Content-Range` exatamente igual ao trecho restante do tamanho esperado. Se o servidor devolver o arquivo inteiro ou outro intervalo, o staging não recebe esses bytes.
+
+O corpo é anexado sem ultrapassar o tamanho esperado. O staging completo é verificado por tamanho e MD5 antes de mover a versão local anterior para recuperação e instalar por rename sem substituição. Uma falha de leitura da resposta é classificada como transitória para retry com espera; um corpo interrompido conserva os bytes já recebidos; checksum divergente de um staging completo descarta somente esse staging para permitir nova tentativa. Falhas, acesso perdido ou arquivo local alterado nunca são convertidos em exclusão. Progresso por bytes começa no offset existente, mas 100% não confirma o journal.
+
+Arquivos de referência Google e a resolução KeepBoth continuam a reiniciar o download; referências são pequenas e não aceitam `Range`. Downloads de tamanho zero são validados sem HTTP de mídia quando o staging já está completo. Testes locais cobrem interrupção e reabertura do journal, Range errado, checksum incorreto e symlink. Falhas reais de rede/disco e headers de produção ainda precisam da [aceitação](../acceptance.md).

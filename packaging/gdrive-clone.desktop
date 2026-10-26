@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Drive para Linux
+Comment=Espelhamento independente do Google Drive
+Exec=drive-desktop
+Icon=gdrive-clone
+Terminal=false
+Categories=Network;FileTransfer;
+StartupNotify=true

@@ -1,0 +1,15 @@
+/target/
+/dist/
+/.env
+/.env.*
+!/.env.example
+/secrets/
+/credentials/
+/corpus/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+client_secret*.json
+/credentials.json
+/token*.json

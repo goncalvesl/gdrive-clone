@@ -1,0 +1,16 @@
+[package]
+name = "local-fs"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lints]
+workspace = true
+
+[dependencies]
+sync-core = { path = "../sync-core" }
+anyhow = "1"
+md-5 = "0.10"
+rustix = { version = "1", features = ["event", "fs"] }
+uuid = { version = "1", features = ["v4"] }

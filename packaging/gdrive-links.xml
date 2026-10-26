@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-gdrive-clone-reference">
+    <comment>Google Drive document reference</comment>
+    <comment xml:lang="pt_BR">Referência de documento Google Drive</comment>
+    <glob pattern="*.gdoc"/>
+    <glob pattern="*.gsheet"/>
+    <glob pattern="*.gslides"/>
+    <glob pattern="*.gdrive-link"/>
+  </mime-type>
+</mime-info>

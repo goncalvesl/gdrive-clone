@@ -1,0 +1,45 @@
+name: gdrive-clone
+arch: amd64
+platform: linux
+version: "0.1.0"
+release: "1"
+section: net
+priority: optional
+maintainer: "gdrive-clone contributors"
+description: "Prévia independente de espelhamento do Google Drive para Linux"
+homepage: "https://github.com/goncalvesl/gdrive-clone"
+license: GPL-3.0-only
+overrides:
+  deb:
+    depends:
+      - libc6
+      - libgcc-s1
+      - libsecret-tools
+  rpm:
+    depends:
+      - glibc
+      - libgcc
+      - libsecret
+contents:
+  - src: ./target/release/drive-desktop
+    dst: /usr/bin/drive-desktop
+    file_info:
+      mode: 0755
+  - src: ./packaging/gdrive-clone.desktop
+    dst: /usr/share/applications/gdrive-clone.desktop
+  - src: ./packaging/gdrive-clone-reference.desktop
+    dst: /usr/share/applications/gdrive-clone-reference.desktop
+  - src: ./assets/drive-linux.svg
+    dst: /usr/share/icons/hicolor/scalable/apps/gdrive-clone.svg
+  - src: ./packaging/gdrive-links.xml
+    dst: /usr/share/mime/packages/gdrive-clone.xml
+  - src: ./packaging/gdrive-clone-system.service
+    dst: /usr/lib/systemd/user/gdrive-clone.service
+  - src: ./LICENSE
+    dst: /usr/share/doc/gdrive-clone/LICENSE
+  - src: ./ATTRIBUTION.md
+    dst: /usr/share/doc/gdrive-clone/ATTRIBUTION.md
+  - src: ./THIRD_PARTY_LICENSES.md
+    dst: /usr/share/doc/gdrive-clone/THIRD_PARTY_LICENSES.md
+  - src: ./packaging/licenses/
+    dst: /usr/share/doc/gdrive-clone/fonts/

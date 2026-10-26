@@ -1,0 +1,82 @@
+name: Preview release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  linux:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.99.1
+      - name: Install desktop build libraries
+        run: sudo apt-get update && sudo apt-get install -y libxkbcommon-dev libwayland-dev libasound2-dev libdbus-1-dev libudev-dev libx11-dev libxcursor-dev libxi-dev libxrandr-dev libgl1-mesa-dev
+      - name: Check project
+        run: ./scripts/check.sh
+      - name: Install nfpm
+        run: |
+          curl -fL --retry 3 -o /tmp/nfpm.tar.gz https://github.com/goreleaser/nfpm/releases/download/v2.48.0/nfpm_2.48.0_Linux_x86_64.tar.gz
+          tar -xzf /tmp/nfpm.tar.gz -C /tmp nfpm
+          sudo install -m 755 /tmp/nfpm /usr/local/bin/nfpm
+      - name: Build deb and rpm
+        run: |
+          ./scripts/package.sh deb
+          ./scripts/package.sh rpm
+      - name: Install appimagetool
+        run: |
+          curl -fL --retry 3 -o /tmp/appimagetool.AppImage https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage
+          chmod +x /tmp/appimagetool.AppImage
+          mkdir -p /tmp/appimagetool-unpacked
+          cd /tmp/appimagetool-unpacked
+          /tmp/appimagetool.AppImage --appimage-extract
+          sudo ln -s /tmp/appimagetool-unpacked/squashfs-root/AppRun /usr/local/bin/appimagetool
+      - name: Build AppImage
+        run: ./scripts/package.sh appimage
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-packages
+          path: dist/*
+
+  arch:
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    container: archlinux:base-devel
+    steps:
+      - name: Install checkout dependencies
+        run: pacman -Syu --noconfirm git rust cargo libsecret
+      - uses: actions/checkout@v4
+      - name: Build package
+        run: |
+          useradd -m builder
+          chown -R builder:builder "$GITHUB_WORKSPACE"
+          cd packaging
+          runuser -u builder -- makepkg --noconfirm --nodeps
+          mkdir -p ../dist
+          cp -- *.pkg.tar.zst ../dist/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arch-package
+          path: dist/*
+
+  publish:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [linux, arch]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: '*package*'
+          merge-multiple: true
+          path: dist
+      - name: Publish preview release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" dist/* --repo "${GITHUB_REPOSITORY}" --prerelease --title "${GITHUB_REF_NAME} (prévia)" --notes "Prévia de espelhamento para homologação. O login exige um cliente OAuth Desktop fornecido pelo distribuidor; nenhum cliente está incluído. Transferências e recuperação ainda não foram homologadas no Google real. Leia README.md e docs/acceptance.md antes de sincronizar dados."
