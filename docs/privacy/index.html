@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Política de Privacidade do aplicativo Drive para Linux.">
+  <title>Política de Privacidade — Drive para Linux</title>
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <header>
+    <nav aria-label="Navegação principal">
+      <a href="../">Início</a>
+      <a href="./" aria-current="page">Política de Privacidade</a>
+      <a href="https://github.com/goncalvesl/gdrive-clone">Código fonte</a>
+    </nav>
+  </header>
+  <main>
+    <p class="eyebrow">Última atualização: 26 de outubro de 2026</p>
+    <h1>Política de Privacidade</h1>
+    <p>Esta política descreve como o <strong>Drive para Linux</strong>, cliente independente de código aberto mantido por Lucas Vilela de Souza Gonçalves, acessa e trata dados ao se conectar a uma conta Google. O aplicativo não é afiliado ao Google.</p>
+
+    <h2>Dados acessados e permissão solicitada</h2>
+    <p>Após a autorização no navegador, o aplicativo solicita o escopo <code>https://www.googleapis.com/auth/drive</code>, que permite visualizar e gerenciar arquivos do Google Drive. Essa permissão é mais ampla do que a pasta selecionada para espelhamento. O aplicativo usa a seleção do usuário para definir a raiz da sincronização, mas pode listar pastas de Meu Drive durante a escolha da raiz e consultar dados necessários à recuperação de operações.</p>
+    <p>O aplicativo pode acessar nomes, IDs, tipos, caminhos, tamanhos, versões e checksums de arquivos e pastas; conteúdo dos arquivos sincronizados; eventos de mudança; nome, e-mail e informações de armazenamento da conta. Ele também lê os arquivos da pasta local escolhida para comparar e sincronizar alterações.</p>
+
+    <h2>Como os dados são usados</h2>
+    <p>Os dados são usados para autenticar a conta, mostrar pastas e informações de armazenamento, planejar e executar o espelhamento bidirecional, detectar conflitos, retomar transferências e permitir recuperação após falhas. Conforme as opções e ações do usuário, o aplicativo pode criar, baixar, enviar, renomear, mover ou enviar arquivos à lixeira do Drive. A propagação de exclusões fica desativada por padrão.</p>
+    <p>Informações recebidas das APIs do Google são usadas somente para as funções visíveis do aplicativo. O projeto segue a Política de Dados de Usuários dos Serviços de API do Google, incluindo seus requisitos de Uso Limitado. Dados do Drive não são usados para publicidade, venda, pontuação de crédito ou treinamento de modelos de inteligência artificial.</p>
+
+    <h2>Onde os dados ficam armazenados</h2>
+    <p>O aplicativo funciona no computador Linux do usuário. A pasta local escolhida contém os arquivos sincronizados. Diretórios privados do aplicativo guardam configuração da conta e das pastas, IDs e metadados em SQLite, cursor de mudanças, histórico de operações, intenções pendentes, sessões de upload, arquivos temporários e cópias locais de recuperação. Os caminhos padrão são <code>~/.config/gdrive-clone</code> e <code>~/.local/share/gdrive-clone</code>, sujeitos às variáveis XDG do sistema.</p>
+    <p>O token de atualização OAuth é guardado no Secret Service (chaveiro) do Linux por meio de <code>secret-tool</code>. O token de acesso fica em memória durante o uso. Tokens não são gravados no banco SQLite. O caminho do arquivo de configuração do cliente OAuth pode ser salvo localmente.</p>
+
+    <h2>Compartilhamento e transferência</h2>
+    <p>O aplicativo se comunica diretamente com os serviços OAuth e Drive do Google por HTTPS para autenticação e operações solicitadas. Pode abrir no navegador links de documentos Google. Não existe servidor do projeto que receba conteúdo do Drive, nem telemetria ou anúncios embutidos. O mantenedor não acessa arquivos ou dados da conta por meio do aplicativo. Dados só chegarão ao mantenedor se o usuário os enviar voluntariamente em uma solicitação de suporte; não envie tokens nem arquivos pessoais em issues públicas.</p>
+    <p>O aplicativo não vende dados nem os compartilha com anunciantes ou corretores de dados. O Google trata os dados recebidos por seus serviços conforme suas próprias políticas.</p>
+
+    <h2>Segurança, controle e exclusão</h2>
+    <p>As conexões com as APIs do Google usam HTTPS; o login usa navegador, PKCE e retorno temporário em <code>127.0.0.1</code>. Configuração e estado local usam diretórios e arquivos privados; a proteção final também depende do sistema e do chaveiro do usuário.</p>
+    <p>O comando <strong>Desconectar</strong> remove o token de atualização do chaveiro local, mas preserva configuração, banco de estado, arquivos sincronizados e cópias de recuperação. Para retirar a autorização da conta Google, o usuário também pode revogar o acesso nas <a href="https://myaccount.google.com/connections">conexões da Conta Google</a>. Os dados locais permanecem até serem removidos pelo usuário; o aplicativo não apaga automaticamente cópias de recuperação. Arquivos mantidos no Drive seguem os controles da própria conta Google.</p>
+
+    <h2>Alterações e contato</h2>
+    <p>Alterações desta política serão publicadas nesta página. Se houver uma nova finalidade para dados do Google, ela deverá ser comunicada antes do uso correspondente. Dúvidas sobre privacidade podem ser enviadas para <a href="mailto:goncalvesl@gmail.com">goncalvesl@gmail.com</a>.</p>
+  </main>
+  <footer><a href="../">Drive para Linux</a> · <a href="https://github.com/goncalvesl/gdrive-clone">Código fonte</a></footer>
+</body>
+</html>

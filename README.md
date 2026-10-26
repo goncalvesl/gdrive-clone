@@ -2,6 +2,8 @@
 
 [Licença GPL-3.0-only](LICENSE) · [Distribuição e pacotes](docs/distribution.md)
 
+[Página do aplicativo](https://goncalvesl.github.io/gdrive-clone/) · [Política de Privacidade](https://goncalvesl.github.io/gdrive-clone/privacy/)
+
 **[Baixar a prévia v0.1.2](https://github.com/goncalvesl/gdrive-clone/releases/tag/v0.1.2)** — AppImage, deb, rpm e Arch Linux (x86_64). O cliente OAuth de distribuição ainda não acompanha os pacotes; sem ele, o login não está disponível.
 
 Cliente independente do Google Drive em Rust, com motor próprio, SQLite e interface desktop nativa egui. Sem rclone, Electron, Tauri ou interface JavaScript.
@@ -37,7 +39,7 @@ A evidência inclui 125 testes locais (um deles é helper de subprocesso), servi
 
 ## Limites atuais
 
-Sem streaming/FUSE, múltiplas contas simultâneas, shared drives, edição offline de documentos Google, projeção de nomes duplicados ou exclusão de árvores de pastas. Esses itens incompatíveis bloqueiam o inventário em vez de serem ignorados silenciosamente. Uma pasta remota dedicada é o escopo de homologação desta prévia.
+Sem streaming/FUSE, múltiplas contas simultâneas, shared drives, edição offline de documentos Google ou exclusão de árvores de pastas. Nomes remotos duplicados recebem aliases locais estáveis derivados do ID; árvores com esses aliases usam inventário completo após eventos Changes para recalcular a projeção. Itens/tipos ainda incompatíveis bloqueiam o inventário em vez de serem ignorados silenciosamente. Uma pasta remota dedicada é o escopo de homologação desta prévia.
 
 Uploads em blocos retomam após consultar a sessão/offset persistidos; downloads binários retomam pelo tamanho do staging e validam `Content-Range` e checksum antes da instalação. O serviço usa watcher local; o cursor Changes atualiza arquivos por ID e reusa o inventário sem eventos; renomeações/movimentos de pastas conhecidas atualizam subárvores por ID; criação/remoção de pastas e colisões provocam varredura completa. Cópias locais de recuperação não são removidas automaticamente. A GUI mostra progresso por bytes e consulta dados/armazenamento da conta. Falhas transitórias permitem novas tentativas com espera; pausa compartilhada entra em vigor entre operações.
 

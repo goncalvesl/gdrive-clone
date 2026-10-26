@@ -154,3 +154,9 @@
 - O CI v0.1.1 produziu os pacotes Ubuntu, mas o Arch falhou na linkedição de aws-lc-sys por LTO do makepkg. PKGBUILD v0.1.2 desativa LTO; o workflow completo passou. Avisos gerados por cargo-about e licenças das fontes foram incluídos nos pacotes.
 - Baixados os artefatos do release: conteúdo deb/rpm/Arch inspecionado; AppImage executou `--help` após marcar o download como executável. `scripts/check.sh` passou localmente para v0.1.2; instalação/GUI em distribuições diferentes e operações Google reais não foram testadas.
 - Próximo passo: fornecer cliente OAuth Desktop do projeto e homologar login, transferências, recuperação e serviço com dados sintéticos em distribuições alvo.
+
+## 2026-10-26 — Política de Privacidade pública
+
+- Preparadas página inicial e Política de Privacidade em HTML estático no diretório `docs/`, com descrição do escopo Drive, dados acessados, finalidade, armazenamento local, chaveiro, exclusão e contato. Links no README e na distribuição.
+- Conteúdo conferido contra OAuth, engine e estado local; links relativos das duas páginas válidos. Sem login, conta Google ou arquivo pessoal acessado nesta tarefa.
+- Pendente: publicar e verificar a URL no GitHub Pages; para a verificação OAuth pública, associar um domínio próprio e comprovar propriedade por DNS conforme exigência atual do Google.

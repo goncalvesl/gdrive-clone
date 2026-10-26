@@ -4,6 +4,7 @@
 |---|---|
 | [Guia de uso](user-guide.md) | Configuração, instalação, recuperação e operação |
 | [Distribuição](distribution.md) | Pacotes, prévia pública, licença e limites do login |
+| [Política de Privacidade pública](privacy/index.html) | Uso, armazenamento e controle dos dados do Google Drive |
 | [Aceitação](acceptance.md) | Homologação pendente antes de versão estável |
 | [Espelhamento runtime](specs/mirror.md) | Contrato ativo no desktop e CLI |
 | [Arquitetura](architecture.md) | Componentes, dependências e estado implementado |
