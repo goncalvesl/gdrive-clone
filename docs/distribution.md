@@ -6,6 +6,8 @@ A [página pública do aplicativo](https://goncalvesl.github.io/gdrive-clone/) c
 
 Os [Termos de Serviço públicos](https://goncalvesl.github.io/gdrive-clone/terms/) estão vinculados à página inicial e à política.
 
+O ícone original está em `assets/drive-linux.svg`; o PNG quadrado de 120 × 120 px para o campo **Logo do app** na configuração OAuth está em [`assets/gdrive-clone-oauth-120.png`](../assets/gdrive-clone-oauth-120.png). O mesmo desenho aparece na página inicial.
+
 ## Instalar
 
 Baixe os arquivos da [versão de prévia no GitHub](https://github.com/goncalvesl/gdrive-clone/releases). Os pacotes `.deb`, `.rpm` e `.pkg.tar.zst` instalam `drive-desktop`, entradas de menu, handler de referências Google, ícone, MIME e uma unidade systemd de usuário. A unidade não é ativada automaticamente. O AppImage pode ser executado após `chmod +x` e contém apenas a aplicação e avisos: integração com menu, MIME e serviço fica a cargo do usuário.

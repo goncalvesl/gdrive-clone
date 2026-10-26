@@ -11,6 +11,7 @@ p,li{max-width:68ch}
 a{color:#1559b1}
 nav{display:flex;gap:1.25rem;flex-wrap:wrap}
 .eyebrow{color:#516173;font-weight:600;font-size:.9rem}
+.logo{display:block;width:96px;height:96px}
 .card{background:#fff;border:1px solid #d8e0e9;border-radius:12px;padding:20px;margin:24px 0}
 .muted{color:#516173}
 @media(prefers-color-scheme:dark){body{background:#111821;color:#e9eef5}footer{border-color:#3b4959;color:#aab9c9}a{color:#89b6ff}.eyebrow,.muted{color:#aab9c9}.card{background:#1b2633;border-color:#3b4959}}
