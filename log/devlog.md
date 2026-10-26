@@ -147,3 +147,10 @@
 - Validação local: `scripts/check.sh` passou (fmt, Clippy, testes e build release); `bash -n` e `desktop-file-validate` passaram; deb, rpm e AppImage gerados; conteúdo dos pacotes inspecionado; AppImage respondeu a `--help`. Arch e workflow GitHub ainda pendentes de tag pública.
 - Próximo passo: publicar o repositório e tag, verificar os quatro artefatos produzidos pelo workflow e homologar instalação nas distribuições com dados sintéticos.
 - O primeiro workflow da tag v0.1.0 falhou antes do empacotamento Ubuntu porque rustfmt não estava instalado no toolchain do runner. Adicionados rustfmt e Clippy explicitamente ao setup; versão da prévia ajustada para 0.1.1. `scripts/check.sh` passou novamente localmente. A falha da primeira tentativa fica registrada, sem tratá-la como release publicado.
+
+## 2026-10-26 — Prévia pública v0.1.2
+
+- Repositório público e release v0.1.2 publicados: AppImage, deb, rpm, pacote Arch e símbolos de depuração Arch. GitHub reconheceu GPLv3. Nenhuma credencial OAuth ou token foi incluído.
+- O CI v0.1.1 produziu os pacotes Ubuntu, mas o Arch falhou na linkedição de aws-lc-sys por LTO do makepkg. PKGBUILD v0.1.2 desativa LTO; o workflow completo passou. Avisos gerados por cargo-about e licenças das fontes foram incluídos nos pacotes.
+- Baixados os artefatos do release: conteúdo deb/rpm/Arch inspecionado; AppImage executou `--help` após marcar o download como executável. `scripts/check.sh` passou localmente para v0.1.2; instalação/GUI em distribuições diferentes e operações Google reais não foram testadas.
+- Próximo passo: fornecer cliente OAuth Desktop do projeto e homologar login, transferências, recuperação e serviço com dados sintéticos em distribuições alvo.

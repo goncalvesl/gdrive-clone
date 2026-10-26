@@ -2,6 +2,8 @@
 
 [Licença GPL-3.0-only](LICENSE) · [Distribuição e pacotes](docs/distribution.md)
 
+**[Baixar a prévia v0.1.2](https://github.com/goncalvesl/gdrive-clone/releases/tag/v0.1.2)** — AppImage, deb, rpm e Arch Linux (x86_64). O cliente OAuth de distribuição ainda não acompanha os pacotes; sem ele, o login não está disponível.
+
 Cliente independente do Google Drive em Rust, com motor próprio, SQLite e interface desktop nativa egui. Sem rclone, Electron, Tauri ou interface JavaScript.
 
 **Estado: prévia executável de espelhamento, para homologação.** Há OAuth, adaptador da API Drive v3, operações em arquivos reais, journal recuperável, CLI, interface e instalador de usuário. O usuário confirmou login e leitura de pastas numa conta real; transferências e recuperação ainda não foram homologadas. Não é uma versão final nem um produto oficial do Google.
