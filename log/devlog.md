@@ -183,5 +183,6 @@
 
 - Cliente Desktop agora aceita JSON apenas com `installed.client_id`; login e renovação omitem `client_secret` vazio. JSON antigo com segredo continua compatível.
 - Receitas geram JSON mínimo para AppImage/deb/rpm/Arch a partir de ID ou arquivo externo. O workflow exige `GDRIVE_OAUTH_CLIENT_ID`, configurado como variável pública do repositório sem imprimir o ID.
-- Validação: `scripts/check.sh` passou; AppImage, deb e rpm foram gerados e inspecionados com o cliente local, confirmando ausência de `client_secret`. AppImage executa `--help`. Arch aguarda build do workflow. Ainda não publicado.
-- Próximo passo: executar a release v0.1.3 e conferir os quatro artefatos no GitHub.
+- Validação: `scripts/check.sh` passou; workflow publicou AppImage, deb, rpm e Arch. Baixados os quatro formatos e confirmado que carregam o ID configurado sem `client_secret`; AppImage executa `--help`.
+- O HTML de verificação Google também foi publicado na raiz de `goncalvesl.github.io`; a URL exata respondeu HTTP 200 com o conteúdo esperado.
+- Pendente: concluir verificação OAuth e homologar login/transferências públicas; nenhuma conta Google foi acessada nesta tarefa.
