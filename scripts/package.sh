@@ -34,6 +34,7 @@ case "${1:-}" in
         install -Dm644 LICENSE "$appdir/usr/share/doc/gdrive-clone/LICENSE"
         install -Dm644 ATTRIBUTION.md "$appdir/usr/share/doc/gdrive-clone/ATTRIBUTION.md"
         install -Dm644 THIRD_PARTY_LICENSES.md "$appdir/usr/share/doc/gdrive-clone/THIRD_PARTY_LICENSES.md"
+        install -Dm644 THIRD_PARTY_NOTICES.html "$appdir/usr/share/doc/gdrive-clone/THIRD_PARTY_NOTICES.html"
         for notice in packaging/licenses/*; do
             install -Dm644 "$notice" "$appdir/usr/share/doc/gdrive-clone/fonts/${notice##*/}"
         done

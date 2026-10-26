@@ -1,7 +1,7 @@
 name: gdrive-clone
 arch: amd64
 platform: linux
-version: "0.1.1"
+version: "0.1.2"
 release: "1"
 section: net
 priority: optional
@@ -41,5 +41,7 @@ contents:
     dst: /usr/share/doc/gdrive-clone/ATTRIBUTION.md
   - src: ./THIRD_PARTY_LICENSES.md
     dst: /usr/share/doc/gdrive-clone/THIRD_PARTY_LICENSES.md
+  - src: ./THIRD_PARTY_NOTICES.html
+    dst: /usr/share/doc/gdrive-clone/THIRD_PARTY_NOTICES.html
   - src: ./packaging/licenses/
     dst: /usr/share/doc/gdrive-clone/fonts/

@@ -1,6 +1,6 @@
 # Maintainer: gdrive-clone contributors
 pkgname=gdrive-clone
-pkgver=0.1.1
+pkgver=0.1.2
 pkgrel=1
 pkgdesc='Prévia independente de espelhamento do Google Drive para Linux'
 arch=('x86_64')
@@ -8,6 +8,8 @@ url='https://github.com/goncalvesl/gdrive-clone'
 license=('GPL-3.0-only')
 depends=('glibc' 'gcc-libs' 'libsecret')
 makedepends=('cargo' 'rust')
+# GCC LTO objects from aws-lc-sys cannot be linked by Rust's lld on Arch.
+options=('!lto')
 source=("${url}/archive/refs/tags/v${pkgver}.tar.gz")
 sha256sums=('SKIP')
 
@@ -27,6 +29,7 @@ package() {
   install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
   install -Dm644 ATTRIBUTION.md "${pkgdir}/usr/share/doc/${pkgname}/ATTRIBUTION.md"
   install -Dm644 THIRD_PARTY_LICENSES.md "${pkgdir}/usr/share/doc/${pkgname}/THIRD_PARTY_LICENSES.md"
+  install -Dm644 THIRD_PARTY_NOTICES.html "${pkgdir}/usr/share/doc/${pkgname}/THIRD_PARTY_NOTICES.html"
   for notice in packaging/licenses/*; do
     install -Dm644 "$notice" "${pkgdir}/usr/share/doc/${pkgname}/fonts/${notice##*/}"
   done
