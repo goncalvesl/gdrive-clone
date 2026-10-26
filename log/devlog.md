@@ -172,3 +172,9 @@
 - Substituído o ícone SVG por uma pasta com setas de sincronização em cores próprias, sem marcas Google. Gerado PNG quadrado de 120 × 120 px (2.956 bytes) para o campo de logo OAuth; a página inicial usa os mesmos bytes. Origem e licença registradas em ATTRIBUTION.
 - SVG analisado, PNG inspecionado visualmente; formato, dimensão e tamanho conferidos. GitHub Pages publicou a imagem com HTTP 200 e `image/png`; download público idêntico ao arquivo do projeto. Nenhuma conta Google foi acessada.
 - Pendente: enviar manualmente o PNG na configuração de Branding do projeto Google e publicar nova versão dos pacotes para incorporar o ícone atualizado; a release v0.1.2 mantém o ícone anterior.
+
+## 2026-10-26 — Cliente OAuth fora do repositório
+
+- Confirmado apenas o formato do arquivo externo `/home/goncalvesl/cliente.json`: cliente OAuth Desktop com campos `client_id` e `client_secret`; valores não foram impressos nem copiados.
+- `.gitignore` agora cobre `cliente.json` e `oauth-client.json` na raiz. `git check-ignore` confirmou ambas as regras.
+- O cliente continua fora do Git; fornecê-lo à instalação por caminho externo permanece o fluxo documentado. Publicação OAuth ainda depende das exigências de verificação do Google.

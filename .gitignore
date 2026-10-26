@@ -11,5 +11,7 @@
 *.sqlite-wal
 
 client_secret*.json
+/cliente.json
+/oauth-client.json
 /credentials.json
 /token*.json
