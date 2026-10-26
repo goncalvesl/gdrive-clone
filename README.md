@@ -2,7 +2,7 @@
 
 [Licença GPL-3.0-only](LICENSE) · [Distribuição e pacotes](docs/distribution.md)
 
-[Página do aplicativo](https://goncalvesl.github.io/gdrive-clone/) · [Política de Privacidade](https://goncalvesl.github.io/gdrive-clone/privacy/)
+[Página do aplicativo](https://goncalvesl.github.io/gdrive-clone/) · [Política de Privacidade](https://goncalvesl.github.io/gdrive-clone/privacy/) · [Termos de Serviço](https://goncalvesl.github.io/gdrive-clone/terms/)
 
 **[Baixar a prévia v0.1.2](https://github.com/goncalvesl/gdrive-clone/releases/tag/v0.1.2)** — AppImage, deb, rpm e Arch Linux (x86_64). O cliente OAuth de distribuição ainda não acompanha os pacotes; sem ele, o login não está disponível.
 

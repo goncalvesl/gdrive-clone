@@ -4,6 +4,8 @@ O código do projeto e os recursos originais são distribuídos sob **GPL-3.0-on
 
 A [página pública do aplicativo](https://goncalvesl.github.io/gdrive-clone/) contém a [Política de Privacidade](https://goncalvesl.github.io/gdrive-clone/privacy/) exigida para apresentar o fluxo OAuth aos usuários. Para uma verificação OAuth pública, o Google também pode exigir domínio próprio verificado por DNS; a hospedagem padrão em `github.io` não comprova essa propriedade.
 
+Os [Termos de Serviço públicos](https://goncalvesl.github.io/gdrive-clone/terms/) estão vinculados à página inicial e à política.
+
 ## Instalar
 
 Baixe os arquivos da [versão de prévia no GitHub](https://github.com/goncalvesl/gdrive-clone/releases). Os pacotes `.deb`, `.rpm` e `.pkg.tar.zst` instalam `drive-desktop`, entradas de menu, handler de referências Google, ícone, MIME e uma unidade systemd de usuário. A unidade não é ativada automaticamente. O AppImage pode ser executado após `chmod +x` e contém apenas a aplicação e avisos: integração com menu, MIME e serviço fica a cargo do usuário.
