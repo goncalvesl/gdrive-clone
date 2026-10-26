@@ -166,3 +166,9 @@
 - Adicionada página HTML de Termos de Serviço da prévia, sem impor restrições adicionais à GPL. Página inicial, política, mapa da documentação e README apontam para a URL pública.
 - GitHub Pages publicou `https://goncalvesl.github.io/gdrive-clone/terms/`; página inicial, política e termos responderam HTTP 200 sem login. Links internos locais conferidos. Sem login ou dados pessoais acessados.
 - Pendente para verificação OAuth pública: hospedar as páginas em domínio próprio comprovado por DNS, conforme exigência atual do Google.
+
+## 2026-10-26 — Logo original para o aplicativo e OAuth
+
+- Substituído o ícone SVG por uma pasta com setas de sincronização em cores próprias, sem marcas Google. Gerado PNG quadrado de 120 × 120 px (2.956 bytes) para o campo de logo OAuth; a página inicial usa os mesmos bytes. Origem e licença registradas em ATTRIBUTION.
+- SVG analisado, PNG inspecionado visualmente; formato, dimensão e tamanho conferidos. GitHub Pages publicou a imagem com HTTP 200 e `image/png`; download público idêntico ao arquivo do projeto. Nenhuma conta Google foi acessada.
+- Pendente: enviar manualmente o PNG na configuração de Branding do projeto Google e publicar nova versão dos pacotes para incorporar o ícone atualizado; a release v0.1.2 mantém o ícone anterior.
